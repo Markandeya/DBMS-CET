@@ -1,7 +1,16 @@
 /* 1A */
 
 
-CREATE TABLE CLIENT_MASTER_5353(CLIENT_NO VARCHAR(20) PRIMARY KEY CHECK (CLIENT_NO LIKE 'C%'), NAME VARCHAR(20) NOT NULL, ADDRESS1 VARCHAR(20), ADDRESS2 VARCHAR(20), CITY VARCHAR(20), PINCODE INT, STATE VARCHAR(20), BAL_DUE FLOAT);
+CREATE TABLE CLIENT_MASTER_5353(
+	CLIENT_NO VARCHAR(20) PRIMARY KEY CHECK (CLIENT_NO LIKE 'C%'), 
+	NAME VARCHAR(20) NOT NULL, 
+	ADDRESS1 VARCHAR(20), 
+	ADDRESS2 VARCHAR(20), 
+	CITY VARCHAR(20), 
+	PINCODE INT, 
+	STATE VARCHAR(20), 
+	BAL_DUE FLOAT
+);
 
 
 
@@ -119,6 +128,8 @@ INSERT INTO SALES_ORDER_DETAILS_5353 VALUES ('O19008', 'P00001', 10, 5, 525 );
 
 RENAME CLIENT_MASTER_5353 TO CLIENTMASTER_5353;
 
+Table renamed
+
 /* 1C */
 
 ALTER TABLE SALES_ORDER_5353 ADD CONSTRAINT DELYAFTERORDER CHECK (ORDER_DATE < DELY_DATE);
@@ -175,5 +186,49 @@ PRODUCT_NO	     DESCRIPTION	  PROFIT_PERCENT UNIT_MEASURE	      QTY_ON_HAND REOR
 P03453		     MONITORS			       6 PIECE			       10	    3	   12000      11280
 P45123		     CD DRIVE			       2 PIECE			       10	    3	    5250       5100
 P35412		     540 HDD			     2.5 PIECE			       10	    3	    8400       8000
+
+/* 3 E */
+
+select * from SALES_ORDER_5353 where extract( MONTH from ORDER_DATE) = 5;
+
+ORDER_NO	     ORDER_DAT CLIENT_NO	    DELY_ADDR		 SALESMAN_NO	      D B DELY_DATE ORDER_STATUS
+-------------------- --------- -------------------- -------------------- -------------------- - - --------- --------------------
+O46866		     20-MAY-96 C00004		    DADAR		 S00002 	      P N 22-MAY-96 CANCELLED
+O19008		     24-MAY-96 C00005		    ROURK		 S00004 	      F N 26-MAY-96 IN PROCESS
+
+
+/* 3 F */
+
+select * from SALES_MASTER_5353 where SALESMAN_NO like 'S00001' OR SALESMAN_NO like 'S00002';
+
+SALESMAN_NO	     SALESMAN_NAME	  ADDRESS1	       CITY		       PINCODE STATE		       SAL_AMT TGT_TO_GET  TTD_SALES REMARKS
+-------------------- -------------------- -------------------- -------------------- ---------- -------------------- ---------- ---------- ---------- --------------------
+S00001		     KIRAN		  A/14		       WORLI			450001 BOMBAY			  3000	      100	  50 GOOD
+S00002		     MANEESH		  J-65		       NARIMAN			450001 BOMBAY			  3000	      200	 100 GOOD
+
+
+/* 3 G */
+
+select * from PRODUCT_MASTER_5353 where SELL_PRICE > 2000 AND SELL_PRICE <= 5000;
+
+PRODUCT_NO	     DESCRIPTION	  PROFIT_PERCENT UNIT_MEASURE	      QTY_ON_HAND REORDER_LVL SELL_PRICE COST_PRICE
+-------------------- -------------------- -------------- -------------------- ----------- ----------- ---------- ----------
+P44783		     KEYBOARDS			       5 PIECE			      100	   20	    3150       3050
+
+
+/* 3 H */
+
+select DESCRIPTION, SELL_PRICE*1.2 "NEW_PRICE" from PRODUCT_MASTER_5353 where SELL_PRICE > 3000; 
+
+
+DESCRIPTION	      NEW_PRICE
+-------------------- ----------
+MONITORS		  14400
+KEYBOARDS		   3780
+CD DRIVE		   6300
+540 HDD 		  10080
+
+
+
 
 
