@@ -218,17 +218,123 @@ P44783		     KEYBOARDS			       5 PIECE			      100	   20	    3150       3050
 
 /* 3 H */
 
-select DESCRIPTION, SELL_PRICE*1.2 "NEW_PRICE" from PRODUCT_MASTER_5353 where SELL_PRICE > 3000; 
+select DESCRIPTION, SELL_PRICE*0.2 "NEW_PRICE" from PRODUCT_MASTER_5353 where SELL_PRICE > 3000; 
 
 
 DESCRIPTION	      NEW_PRICE
 -------------------- ----------
-MONITORS		  14400
-KEYBOARDS		   3780
-CD DRIVE		   6300
-540 HDD 		  10080
+MONITORS		   2400
+KEYBOARDS		    630
+CD DRIVE		   1050
+540 HDD 		   1680
 
 
+/* 3 I */
+
+select count(*) from PRODUCT_MASTER_5353;
+
+
+  COUNT(*)
+----------
+	 6
+
+/* 3 J */
+
+
+select count(ORDER_STATUS) from SALES_ORDER_5353 where ORDER_STATUS LIKE 'FULFILLED';
+
+
+COUNT(ORDER_STATUS)
+-------------------
+		  2
+
+/* 3 K */
+
+select avg(SELL_PRICE), avg(COST_PRICE) from PRODUCT_MASTER_5353;
+
+AVG(SELL_PRICE) AVG(COST_PRICE)
+--------------- ---------------
+	 5062.5      4821.66667
+
+
+/* 4 A */
+
+
+select ORDER_NO, extract( DAY from ORDER_DATE) from SALES_ORDER_5353;
+
+ORDER_NO	     EXTRACT(DAYFROMORDER_DATE)
+-------------------- --------------------------
+O19001					     12
+O19002					     25
+O46865					     18
+O19003					      3
+O46866					     20
+O19008					     24
+
+6 rows selected.
+
+/* 4 B */
+
+select extract(MONTH from DELY_DATE), DELY_DATE from SALES_ORDER_5353;
+
+
+EXTRACT(MONTHFROMDELY_DATE) DELY_DATE
+--------------------------- ---------
+			  1 20-JAN-96
+			  1 27-JAN-96
+			  2 20-FEB-96
+			  4 07-APR-96
+			  5 22-MAY-96
+			  5 26-MAY-96
+
+6 rows selected.
+
+/* 4 C */
+
+select  to_char(order_date, 'dd/month/yy')  from sales_order_5353;
+
+
+
+TO_CHAR(ORDER_D
+---------------
+12/january  /96
+25/january  /96
+18/february /96
+03/april    /96
+20/may	    /96
+24/may	    /96
+
+6 rows selected.
+
+
+/* 4 D */
+
+select sysdate + 15 as "15 days" from dual;
+
+15 days
+---------
+20-SEP-19
+
+
+/* 4 E */
+
+select order_no, dely_date - order_date as "Days elapsed" from sales_order_5353;
+
+
+ORDER_NO	     Days elapsed
+-------------------- ------------
+O19001				8
+O19002				2
+O46865				2
+O19003				4
+O46866				2
+O19008				2
+
+6 rows selected.
+
+/* 5 A */
+
+select product_no, cost_price from product_master_5353 group
 
 
 
