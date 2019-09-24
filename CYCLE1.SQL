@@ -332,9 +332,104 @@ O19008				2
 
 6 rows selected.
 
+/* 5 */
+
+create table item_order12_5353(
+	cust_name varchar(15),
+	address varchar(10),
+	item varchar(15),
+	price number(5) );
+
+Table created.
+
+
+insert into item_order12_5353 values('BASU', 'WORLI', 'MONITOR', 1000);
+
+1 row created.
+
+insert into item_order12_5353 values('IVAN', 'JUHU', 'KEYBOARD', 800);
+insert into item_order12_5353 values('IVAN', 'WORLI', 'PRINTER', 1500);
+insert into item_order12_5353 values('BAYROSS', 'WANDON', 'PRINTER', 1500);
+insert into item_order12_5353 values('BASU', 'DADAR', 'MOUSE', 500);
+insert into item_order12_5353 values('VANDANA', 'WANDON', 'MONITOR', 1000);
+insert into item_order12_5353 values('VANDANA', 'WANDON', 'KEYBOARD', 800);
+insert into item_order12_5353 values('BAYROSS', 'JUHU', 'MOUSE', 500);
+
 /* 5 A */
 
-select product_no, cost_price from product_master_5353 group
+select item,sum(price) from item_order12_5353 group by item;
+
+ITEM		SUM(PRICE)
+--------------- ----------
+MONITOR 	      2000
+PRINTER 	      3000
+MOUSE		      1000
+KEYBOARD	      1600
+
+4 rows selected.
+
+/* 5 B */
+
+select cust_name, item from item_order12_5353 order by cust_name;
+
+CUST_NAME	ITEM
+--------------- ---------------
+BASU		MONITOR
+BASU		MOUSE
+BAYROSS 	PRINTER
+BAYROSS 	MOUSE
+IVAN		KEYBOARD
+IVAN		PRINTER
+VANDANA 	MONITOR
+VANDANA 	KEYBOARD
+
+8 rows selected.
+
+/* 5 C */
+
+select item, address from item_order12_5353 order by address;
+
+ITEM		ADDRESS
+--------------- ----------
+MOUSE		DADAR
+KEYBOARD	JUHU
+MOUSE		JUHU
+PRINTER 	WANDON
+MONITOR 	WANDON
+KEYBOARD	WANDON
+PRINTER 	WORLI
+MONITOR 	WORLI
+
+8 rows selected.
+
+/* 5 D */
+
+select cust_name, sum(price) from item_order12_5353 group by cust_name having sum(price) > 200;
+
+CUST_NAME	SUM(PRICE)
+--------------- ----------
+BAYROSS 	      2000
+BASU		      1500
+IVAN		      2300
+VANDANA 	      1800
+
+/* 6 A */
+
+select name, address1, address2, city, pincode from clientmaster_5353 where client_no like (select client_no
+from sales_order_5353 where order_no like 'O19001');
+
+
+NAME		     ADDRESS1		  ADDRESS2	       CITY		       PINCODE
+-------------------- -------------------- -------------------- -------------------- ----------
+IVAN BAYROSS	     WANDON		  WORLI 	       MUMBAI			450005
+
+
+/* 6 B */
+
+select client_no from sales_order_5353 where  extract(MONTH from order_date) > 5;
+
+
+
 
 
 
