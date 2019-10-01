@@ -426,8 +426,14 @@ IVAN BAYROSS	     WANDON		  WORLI 	       MUMBAI			450005
 
 /* 6 B */
 
-select client_no from sales_order_5353 where  extract(MONTH from order_date) > 5;
+select name from clientmaster_5353 where client_no IN (select client_no from sales_order_5353 where  extract(MONTH from order_date) < 5);
 
+
+NAME
+--------------------
+IVAN BAYROSS
+VANDANA SHIVA
+PRAMADAJAGUST
 
 
 
