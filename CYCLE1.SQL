@@ -436,6 +436,34 @@ VANDANA SHIVA
 PRAMADAJAGUST
 
 
+/* 6 C */ 
 
+select client_no, name from clientmaster_5353 where client_no in (select client_no from sales_order_5353 where order_no in (select order_no from sales_order_details_5353 where product_no like (select product_no from product_master_5353 where description like '1.44 FLOPPIES')));
+
+
+CLIENT_NO	     NAME
+-------------------- --------------------
+C00001		     IVAN BAYROSS
+C00003		     PRAMADAJAGUST
+C00002		     VANDANA SHIVA
+C00005		     RAVISREEDHARAN
+
+/* 6 D */
+
+select product_no, description from product_master_5353 where product_no not in (select distinct product_no from sales_order_details_5353);
+
+PRODUCT_NO	     DESCRIPTION
+-------------------- --------------------
+P35412		     540 HDD
+P44783		     KEYBOARDS
+P45123		     CD DRIVE
+P45789		     MOUSE
+
+/* 6 E */
+
+
+select name from clientmaster_5353 where client_no IN (select client_no from sales_order_5353 where order_no IN (select order_no from sales_order_details_5353 where product_rate * qty_ordered >= 10000));
+
+no rows selected
 
 
