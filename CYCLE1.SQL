@@ -260,7 +260,7 @@ AVG(SELL_PRICE) AVG(COST_PRICE)
 /* 4 A */
 
 
-select ORDER_NO, extract( DAY from ORDER_DATE) from SALES_ORDER_5353;
+select ORDER_NO, extract( DAY from ORDER_DATE) from SALES_ORDER_5353; //select ORDER_NO, to_char(ORDER_DATE, 'day') from SALES_ORDER_5353;
 
 ORDER_NO	     EXTRACT(DAYFROMORDER_DATE)
 -------------------- --------------------------
@@ -462,8 +462,48 @@ P45789		     MOUSE
 /* 6 E */
 
 
-select name from clientmaster_5353 where client_no IN (select client_no from sales_order_5353 where order_no IN (select order_no from sales_order_details_5353 where product_rate * qty_ordered >= 10000));
+select name from clientmaster_5353 where client_no IN (select client_no from sales_order_5353 where order_no IN (select order_no from sales_order_details_5353 where product_rate * qty_ordered >= 1000));
 
-no rows selected
+NAME
+--------------------
+IVAN BAYROSS
+VANDANA SHIVA
+PRAMADAJAGUST
+RAVISREEDHARAN
+
+
+
+/* 7 A */
+
+create view clientmaster_5353_view as select client_no, name, city from clientmaster_5353;
+
+View created.
+
+
+/* 7 B */
+
+update clientmaster_5353_view set name='IVAN BAYROSE' where client_no LIKE 'C00001';
+
+1 row updated.
+
+update clientmaster_5353_view set name='PADMAJA AGUST' where client_no LIKE 'C00003';
+
+1 row updated.
+
+select * from clientmaster_5353_view;
+
+
+CLIENT_NO	     NAME		  CITY
+-------------------- -------------------- --------------------
+C00001		     IVAN BAYROSE	  MUMBAI
+C00002		     VANDANA SHIVA	  MADRAS
+C00003		     PADMAJA AGUST	  MUMBAI
+C00004		     BASU NAVINDGI	  MUMBAI
+C00005		     RAVISREEDHARAN	  DELHI
+C00006		     RUKMINI		  MUMBAI
+
+6 rows selected.
+
+
 
 
