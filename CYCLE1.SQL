@@ -260,32 +260,34 @@ AVG(SELL_PRICE) AVG(COST_PRICE)
 /* 4 A */
 
 
-select ORDER_NO, extract( DAY from ORDER_DATE) from SALES_ORDER_5353; //select ORDER_NO, to_char(ORDER_DATE, 'day') from SALES_ORDER_5353;
+select ORDER_NO, to_char(ORDER_DATE, 'day') from SALES_ORDER_5353;
 
-ORDER_NO	     EXTRACT(DAYFROMORDER_DATE)
--------------------- --------------------------
-O19001					     12
-O19002					     25
-O46865					     18
-O19003					      3
-O46866					     20
-O19008					     24
+ORDER_NO	     TO_CHAR(O
+-------------------- ---------
+O19001		     friday
+O19002		     thursday
+O46865		     sunday
+O19003		     wednesday
+O46866		     monday
+O19008		     friday
+
 
 6 rows selected.
 
 /* 4 B */
 
-select extract(MONTH from DELY_DATE), DELY_DATE from SALES_ORDER_5353;
+select to_char(DELY_DATE, 'MONTH'), DELY_DATE from SALES_ORDER_5353;
 
 
-EXTRACT(MONTHFROMDELY_DATE) DELY_DATE
---------------------------- ---------
-			  1 20-JAN-96
-			  1 27-JAN-96
-			  2 20-FEB-96
-			  4 07-APR-96
-			  5 22-MAY-96
-			  5 26-MAY-96
+TO_CHAR(D DELY_DATE
+--------- ---------
+JANUARY   20-JAN-96
+JANUARY   27-JAN-96
+FEBRUARY  20-FEB-96
+APRIL	  07-APR-96
+MAY	  22-MAY-96
+MAY	  26-MAY-96
+
 
 6 rows selected.
 
@@ -426,7 +428,7 @@ IVAN BAYROSS	     WANDON		  WORLI 	       MUMBAI			450005
 
 /* 6 B */
 
-select name from clientmaster_5353 where client_no IN (select client_no from sales_order_5353 where  extract(MONTH from order_date) < 5);
+select name from clientmaster_5353 where client_no IN (select client_no from sales_order_5353 where order_date < '01-may-96');
 
 
 NAME
