@@ -1,13 +1,6 @@
 set serveroutput on;
 DECLARE
-	pid product_master_5353.product_no%type;
-	des product_master_5353.description%type;
-	profit product_master_5353.profit_percent%type;
-	unit product_master_5353.unit_measure%type;
-	qty product_master_5353.qty_on_hand%type;
-	reorder product_master_5353.reorder_lvl%type;
-	sell product_master_5353.sell_price%type;
-	cost product_master_5353.cost_price%type;	
+	rowtype product_master_5353%rowtype;	
 
 	cursor products is select * from product_master_5353;
 BEGIN
@@ -16,11 +9,11 @@ BEGIN
 	
 	loop
 
-	fetch products into pid, des, profit, unit, qty, reorder, sell, cost;
+	fetch products into rowtype;
 
 	exit when products%notfound;
 	
-	dbms_output.put_line(pid ||'		'|| des ||'		'  || profit ||'		' || unit ||'		' || qty ||'		' || reorder ||'		' || sell ||'		' || cost); 
+	dbms_output.put_line(rowtype.product_no ||'		'|| rowtype.description ||'		'  || rowtype.profit_percent ||'		' || rowtype.unit_measure ||'		' || rowtype.qty_on_hand ||'		' || rowtype.reorder_lvl ||'		' || rowtype.sell_price ||'		' || rowtype.cost_price); 
 	
 	end loop;
 

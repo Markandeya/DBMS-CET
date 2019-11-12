@@ -1,15 +1,6 @@
 set serveroutput on;
 DECLARE
-	ono sales_order_5353.order_no%type;
-	odate sales_order_5353.order_date%type;
-	cno sales_order_5353.client_no%type;
-	delyaddr sales_order_5353.dely_addr%type;
-	sman_no sales_order_5353.salesman_no%type;
-	delytype sales_order_5353.dely_type%type;
-	billed sales_order_5353.billed_yn%type;
-	delydate sales_order_5353.dely_date%type;
-	ostatus sales_order_5353.order_status%type;
-
+	rowtype  sales_order_5353%rowtype;
 	sno varchar(20);
 
 	cursor sales(snum varchar) is select * from sales_order_5353 where salesman_no like snum;
@@ -21,11 +12,11 @@ BEGIN
 	
 	loop
 
-	fetch sales into ono, odate, cno, delyaddr, sman_no, delytype, billed, delydate, ostatus;
+	fetch sales into rowtype;
 
 	exit when sales%notfound;
 	
-	dbms_output.put_line(ono ||'	' || odate ||'	' || cno ||'	' || delyaddr ||'	' || sman_no ||'	' || delytype ||'	' || billed ||'	' || delydate ||'	' || ostatus); 
+	dbms_output.put_line(rowtype.order_no ||'	' || rowtype.order_no ||'	' || rowtype.client_no ||'	' || rowtype.dely_addr ||'	' || rowtype.salesman_no ||'	' || rowtype.dely_type ||'	' || rowtype.billed_yn ||'	' || rowtype.dely_date ||'	' || rowtype.order_status); 
 	
 	end loop;
 

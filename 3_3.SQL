@@ -1,15 +1,8 @@
 set serveroutput on;
 DECLARE
-	cno clientmaster_5353.client_no%type;
-	nam clientmaster_5353.name%type;
-	add1 clientmaster_5353.address1%type;
-	add2 clientmaster_5353.address2%type;
-	city clientmaster_5353.city%type;
-	pin clientmaster_5353.pincode%type;
-	stat clientmaster_5353.state%type;
-	bal clientmaster_5353.bal_due%type;
+	rowtype clientmaster_5353%rowtype;
 
-	sno varchar(20);
+	p varchar(20);
 
 	cursor clients(place varchar) is select * from clientmaster_5353 where state like place;
 BEGIN
@@ -20,11 +13,11 @@ BEGIN
 	
 	loop
 
-	fetch clients into cno, nam, add1, add2, city, pin, stat, bal;
+	fetch clients into rowtype;
 
 	exit when clients%notfound;
 	
-	dbms_output.put_line(cno ||'	' || nam ||'	' || add1 ||'	' || add2 ||'	' || city ||'	' || pin ||'	' || stat ||'	' || bal); 
+	dbms_output.put_line(rowtype.client_no ||'	' || rowtype.name ||'	' || rowtype.address1 ||'	' || rowtype.address2 ||'	' || rowtype.city ||'	' || rowtype.pincode ||'	' || rowtype.state ||'	' || rowtype.bal_due); 
 	
 	end loop;
 
