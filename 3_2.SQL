@@ -16,7 +16,7 @@ BEGIN
 
 	exit when sales%notfound;
 	
-	dbms_output.put_line(rowtype.order_no ||'	' || rowtype.order_no ||'	' || rowtype.client_no ||'	' || rowtype.dely_addr ||'	' || rowtype.salesman_no ||'	' || rowtype.dely_type ||'	' || rowtype.billed_yn ||'	' || rowtype.dely_date ||'	' || rowtype.order_status); 
+	dbms_output.put_line(rowtype.order_no ||'	' || rowtype.order_date ||'	' || rowtype.client_no ||'	' || rowtype.dely_addr ||'	' || rowtype.salesman_no ||'	' || rowtype.dely_type ||'	' || rowtype.billed_yn ||'	' || rowtype.dely_date ||'	' || rowtype.order_status); 
 	
 	end loop;
 
